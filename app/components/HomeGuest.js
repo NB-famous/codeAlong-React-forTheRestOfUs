@@ -1,7 +1,33 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Page from './Page'
+import Axios from 'axios'
+
+
+
 
 const HomeGuest = () => {
+
+    const [username, setUsername] = useState()
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+
+
+    async function handleSubmit(event){
+        event.preventDefault()
+        try{
+            await Axios.post('http://localhost:3001/register', {
+            // providing hard coded data for now -> pw is 12 char min         
+            username, email, password})
+            console.log("user succesful") 
+
+        }catch(error){
+            console.log("ERROR")
+        }
+        
+        /* Axios.post('http://localhost:3001/register', {
+        // providing hard coded data for now -> pw is 12 char min         
+        username:"test", email:"test@test.com", password:"nikko1234567"}) */
+    }
 
     return (
         <Page wide={true} title="Home">
@@ -13,27 +39,27 @@ const HomeGuest = () => {
                     </p>
                 </div>
                 <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="username-register" className="text-muted mb-1">
                                 <small>Username</small>
                             </label>
-                            <input id="username-register" name="username" className="form-control" type="text" placeholder="Pick a username" autoComplete="off" />
+                            <input onChange={event => setUsername(event.target.value)} id="username-register" name="username" className="form-control" type="text" placeholder="Pick a username" autoComplete="off" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="email-register" className="text-muted mb-1">
                                 <small>Email</small>
                             </label>
-                            <input id="email-register" name="email" className="form-control" type="text" placeholder="you@example.com" autoComplete="off" />
+                            <input onChange={event => setEmail(event.target.value)} id="email-register" name="email" className="form-control" type="text" placeholder="you@example.com" autoComplete="off" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="password-register" className="text-muted mb-1">
                                 <small>Password</small>
                             </label>
-                            <input id="password-register" name="password" className="form-control" type="password" placeholder="Create a password" />
+                            <input onChange={event => setPassword(event.target.value)} id="password-register" name="password" className="form-control" type="password" placeholder="Create a password" />
                         </div>
                         <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
-                        Sign up htmlFor ComplexApp
+                        Sign up For ComplexApp
                         </button>
                     </form>
                 </div>

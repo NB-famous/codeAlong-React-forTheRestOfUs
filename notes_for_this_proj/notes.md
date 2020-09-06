@@ -44,3 +44,24 @@
     -> to build snippet go to www.snippet-generator.app
 
 -Learned about Composition method -> check out page component
+
+- Learn about axios post 
+    ->npm install axios
+    -> Import Axios from 'axios'
+
+    -> Example function using axios to post 
+
+        -> async function handleSubmit(event){
+                event.preventDefault()
+                try{
+                    await Axios.post('http://localhost:3001/register', {
+                    // providing hard coded data for now -> pw is 12 char min -> this is set up in the backend which was  
+                    //already pre built for me          
+                    username:"test", email:"test@test.com", password:"nikko1234567"})
+                    console.log("user succesful") 
+
+                }catch(error){
+                    console.log("ERROR")
+                }
+                
+            }
