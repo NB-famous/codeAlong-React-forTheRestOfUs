@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Axios from 'axios'
 
-const ComponentName = () => {
+const HeaderLoggedOut = (props) => {
 
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
@@ -15,7 +15,11 @@ const ComponentName = () => {
                 password
             });
             if(response.data) {
-
+                console.log("this is response", response)
+                localStorage.setItem("appToken", response.data.token) // Then object is from response we made through url attach to MongoDB
+                localStorage.setItem("appUsername", response.data.username)
+                localStorage.setItem("appAvatar", response.data.avatar)
+                props.setLoggedIn(true)
 
             } else {
                 console.log("incorrect something")
@@ -44,4 +48,4 @@ const ComponentName = () => {
   )
 }
 
-export default ComponentName
+export default HeaderLoggedOut
